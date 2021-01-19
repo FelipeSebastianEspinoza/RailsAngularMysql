@@ -2,7 +2,14 @@ frontend
   -> yarn serve
 
 backend
-  -> docker-compose up
+Paso 1) Usamos el comando: docker-compose run --no-deps web rails new . --force --database=mysql
+Paso 2) Usamos el comando “ sudo chown -R $USER:$felipe . “ para dar permisos en el contenedor. 
+Paso 3) Usamos el comando: docker-compose build
+Paso 4) Copiamos el contenido del archivo database.yml o lo reemplazamos en config database.yml.
+Paso 5) Usamos los comandos:
+          docker-compose up  
+          docker-compose run web rake db:create (aveces este no es necesario ya que crea la bd en anterior)
+          -> docker-compose up
 
 
  
