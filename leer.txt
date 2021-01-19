@@ -5,6 +5,7 @@ backend
 Paso 1) Usamos el comando: docker-compose run --no-deps web rails new . --force --database=mysql
 Paso 2) Usamos el comando “ sudo chown -R $USER:$felipe . “ para dar permisos en el contenedor. 
 Paso 3) Usamos el comando: docker-compose build
+Paso 3.5) Eliminar el archivo ".git" que se crea en backend asi se pueden subir los cambios al git.
 Paso 4) Copiamos el contenido del archivo database.yml o lo reemplazamos en config database.yml.
 Paso 5) Usamos los comandos:
           docker-compose up  
