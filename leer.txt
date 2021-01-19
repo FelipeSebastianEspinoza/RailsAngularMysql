@@ -1,0 +1,8 @@
+frontend
+  -> yarn serve
+
+backend
+  -> docker-compose up
+
+
+ 
