@@ -23,11 +23,15 @@ rails g resource example name:string colour:string
  
  
  
+docker-compose run backend bundle install
+docker-compose up --build
+ 
+docker-compose run backend rails 
  
  
  
  Otros importantes
- 
+ docker run --rm -it -v ${PWD}:/app my_app /bin/sh -c 'apt install -y nano && EDITOR=nano bin/rails credentials:edit'
  
  docker-compose run backend bash
 > rails g resource example name:string colour:string
