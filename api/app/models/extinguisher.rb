@@ -1,0 +1,2 @@
+class Extinguisher < ApplicationRecord
+end
