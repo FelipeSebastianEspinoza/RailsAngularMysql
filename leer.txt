@@ -1,5 +1,5 @@
 frontend
-  -> yarn serve
+  -> docker run -it -p 5000:5000 frontend
 
 backend
 Paso 1) Usamos el comando: 
