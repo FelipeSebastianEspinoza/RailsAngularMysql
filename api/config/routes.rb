@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   post 'extinguishers', to: 'extinguishers#create'
   patch 'extinguishers/:id', to: 'extinguishers#update'
   delete 'extinguishers/:id', to: 'extinguishers#delete'
-
+ 
 end
