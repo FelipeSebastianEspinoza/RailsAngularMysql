@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     post '/signup', to: 'registrations#create'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
+    get '/user', to: 'sessions#show'
   end
 
   get 'extinguishers', to: 'extinguishers#show'
