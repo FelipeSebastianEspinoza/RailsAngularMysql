@@ -1,0 +1,4 @@
+docker build -t frontend .
+docker run -d -it -p 8000:80 --name frontend frontend
+
+ng serve
