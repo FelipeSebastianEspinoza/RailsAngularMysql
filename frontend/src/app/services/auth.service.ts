@@ -17,6 +17,16 @@ export class AuthService {
       },
     };
  
+     return this.http.post<any>(this.URL + '/signup', this.usuario)  
+  }
+  signIn(user) {
+    this.usuario = {
+      user: {
+        email: user.email,
+        password: user.password,
+      },
+    };
+ 
      return this.http.post<any>(this.URL + '/login', this.usuario)  
   }
 }
