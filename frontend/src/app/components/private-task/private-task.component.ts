@@ -10,6 +10,7 @@ export class PrivateTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(localStorage)
   }
 
 }

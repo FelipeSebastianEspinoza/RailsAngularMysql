@@ -16,8 +16,8 @@ export class AuthService {
         password: user.password,
       },
     };
- 
-     return this.http.post<any>(this.URL + '/signup', this.usuario)  
+
+    return this.http.post<any>(this.URL + '/signup', this.usuario);
   }
   signIn(user) {
     this.usuario = {
@@ -26,7 +26,6 @@ export class AuthService {
         password: user.password,
       },
     };
- 
-     return this.http.post<any>(this.URL + '/login', this.usuario)  
+    return this.http.post<any>(this.URL + '/login', this.usuario);
   }
 }
