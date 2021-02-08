@@ -1,7 +1,12 @@
 <nav>
-  <a routerLink="/signin">login</a> | <a routerLink="/signup">signup</a> |
-  <a routerLink="/private">private</a> |
-  <a routerLink="/task">task</a>
+  <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
+    <a routerLink="/signin">login</a> | <a routerLink="/signup">signup</a> |
+  </ng-container>
+  <ng-template #loggedIn>
+    <a routerLink="/private">private</a> | <a routerLink="/task">task</a> |
+    <a (click)="authService.logout()">logout</a>
+  </ng-template>
+ 
 </nav>
 
 <router-outlet></router-outlet>
