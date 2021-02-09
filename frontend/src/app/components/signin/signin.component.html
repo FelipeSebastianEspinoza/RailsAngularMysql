@@ -1,19 +1,20 @@
-<div>
-  <div class="card text-center">
+<div class="d-flex justify-content-center">
+  <div class="card text-center" style="width: 25rem;">
     <div class="card-header">
       <h2>Iniciar Sesión</h2>
     </div>
     <div class="card-body ">
       <form (submit)="signIn()">
         <div class="form-group">
-          <input type="text" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email" required
+          <input type="text" [(ngModel)]="user.email" name="email" class="form-control mt-4" placeholder="Email" required
             autofocus />
+            
         </div>
         <div class="form-group">
-          <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password"
+          <input type="password" [(ngModel)]="user.password" name="password" class="form-control mt-4" placeholder="Password"
             required />
         </div>
-        <button class="btn btn-primary btn-block">Iniciar</button>
+        <button class="btn btn-primary btn-block mt-4 mb-2">Iniciar</button>
       </form>
     </div>
   </div>

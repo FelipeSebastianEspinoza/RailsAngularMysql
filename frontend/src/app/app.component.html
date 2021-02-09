@@ -9,7 +9,7 @@
         <a class="nav-link" routerLink="/task">Home</a>
       </li>
       <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
-        <li class="nav-item">
+        <li class="nav-item ">
           <a class="nav-link" routerLink="/signin">iniciar sesión</a>
         </li>
         <li class="nav-item">
@@ -22,6 +22,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" style="cursor: pointer; " (click)="authService.logout()">cerrar sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/extinguishers">extinguishers</a>
         </li>
       </ng-template>
     </ul>

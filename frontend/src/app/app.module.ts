@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth.guard';
 
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { ExtinguishersComponent } from './components/extinguishers/extinguishers.component';
+
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,8 +24,15 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     SigninComponent,
     TaskComponent,
     PrivateTaskComponent,
+    ExtinguishersComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    NgxPaginationModule,
+  ],
   providers: [
     AuthGuard,
     {

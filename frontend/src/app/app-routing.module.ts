@@ -5,7 +5,11 @@ import { TaskComponent } from './components/task/task.component';
 import { PrivateTaskComponent } from './components/private-task/private-task.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+
+import { ExtinguishersComponent } from './components/extinguishers/extinguishers.component';
+
 import { AuthGuard } from './auth.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -28,6 +32,11 @@ const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent,
+  },
+  {
+    path: 'extinguishers',
+    component: ExtinguishersComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

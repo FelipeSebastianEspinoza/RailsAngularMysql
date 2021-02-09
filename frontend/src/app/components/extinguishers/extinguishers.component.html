@@ -1,0 +1,3 @@
+<ul>
+    <li *ngFor="let item of heroes | paginate: {  itemsPerPage: 10, currentPage: 1 }"> {{item.name}} </li>
+  </ul>
