@@ -1,3 +1,21 @@
-<ul>
-    <li *ngFor="let item of extinguisherService.extinguishers | paginate: {  itemsPerPage: 10, currentPage: 1 }">{{item.id}} | {{item.name}}</li>
-  </ul>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="name">Name</th>
+      <th scope="status">Status</th>
+      <th scope="charge">Charge</th>
+      <th scope="expiration">Expiration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of extinguisherService.extinguishers | paginate: {  itemsPerPage: items_page, currentPage: p }">
+      <td>{{item.name}}</td>
+      <td>{{item.status}}</td>
+      <td>{{item.charge}}</td>
+      <td>{{item.expiration}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

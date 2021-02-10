@@ -12,6 +12,8 @@ export class ExtinguisherService {
    // this.selectedExtinguisher = new Extinguisher();
   }
   getExtinguishers(){
+ 
     return this.http.get(`http://localhost:3000/extinguishers`)
+    
   }
 }

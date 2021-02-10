@@ -10,7 +10,8 @@ import { Extinguisher } from '../../services/extinguisher';
 })
 export class ExtinguishersComponent implements OnInit {
   constructor(public extinguisherService: ExtinguisherService) {}
-
+  p: number = 1;
+  items_page: number = 5;
   ngOnInit(): void {
     this.getExtinguishers();
   }
