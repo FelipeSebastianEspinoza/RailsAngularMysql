@@ -10,14 +10,33 @@ import { Extinguisher } from '../../services/extinguisher';
 })
 export class ExtinguishersComponent implements OnInit {
   constructor(public extinguisherService: ExtinguisherService) {}
-  p: number = 1;
-  items_page: number = 5;
+
+  page: number = 1;
+  per_page: number = 5;
+  search: string = '';
+
   ngOnInit(): void {
     this.getExtinguishers();
   }
+
   getExtinguishers() {
-    this.extinguisherService.getExtinguishers().subscribe((res) => {
-      this.extinguisherService.extinguishers = res as Extinguisher[];
-    });
+    this.extinguisherService
+      .getExtinguishers(this.page, this.per_page)
+      .subscribe((res) => {
+        this.extinguisherService.extinguishers = res as Extinguisher[];
+      });
+  }
+  filterSearch() {
+    this.search = this.search.replace(/\s/g, '');
+    if (this.search != '') {
+      console.log(this.search);
+      this.extinguisherService
+        .getExtinguishersSearch(this.page, this.per_page, this.search)
+        .subscribe((res) => {
+          this.extinguisherService.extinguishers = res as Extinguisher[];
+        });
+    } else {
+      this.getExtinguishers();
+    }
   }
 }

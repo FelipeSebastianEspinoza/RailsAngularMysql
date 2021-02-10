@@ -15,8 +15,6 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ExtinguishersComponent } from './components/extinguishers/extinguishers.component';
 
-import { NgxPaginationModule } from 'ngx-pagination';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +29,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule,
   ],
   providers: [
     AuthGuard,

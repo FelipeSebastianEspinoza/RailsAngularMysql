@@ -1,16 +1,27 @@
 class ExtinguishersController < ApplicationController
   before_action :set_extinguisher, only: [:show, :update, :destroy]
-
+ 
   # GET /extinguishers
   def index
-    @extinguishers = Extinguisher.all
+    
+    if params[:name]
+     
+      extinguishers = Extinguisher.where('name LIKE ?', "%#{params[:name]}%")
+ 
 
-    render json: @extinguishers
+
+
+      paginate json: extinguishers
+    else
+
+      extinguishers = Extinguisher.where(active: 'true')
+      paginate json: extinguishers
+    end
   end
 
   # GET /extinguishers/1
   def show
-    render json: @extinguisher
+     render json: @extinguisher
   end
 
   # POST /extinguishers
