@@ -13,7 +13,6 @@ class ExtinguishersController < ApplicationController
 
       paginate json: extinguishers
     else
-
       extinguishers = Extinguisher.where(active: 'true')
       paginate json: extinguishers
     end

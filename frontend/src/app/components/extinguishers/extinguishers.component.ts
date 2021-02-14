@@ -11,32 +11,38 @@ import { Extinguisher } from '../../services/extinguisher';
 export class ExtinguishersComponent implements OnInit {
   constructor(public extinguisherService: ExtinguisherService) {}
 
+  emptySearch = false;
   page: number = 1;
   per_page: number = 5;
   search: string = '';
 
   ngOnInit(): void {
-    this.getExtinguishers();
+    this.filterSearch();
   }
 
-  getExtinguishers() {
-    this.extinguisherService
-      .getExtinguishers(this.page, this.per_page)
-      .subscribe((res) => {
-        this.extinguisherService.extinguishers = res as Extinguisher[];
-      });
+  setExtinguiserResponse(res) {
+    if (Array.isArray(res) && res.length) {
+      this.extinguisherService.extinguishers = res as Extinguisher[];
+      this.emptySearch = false;
+    } else {
+      this.extinguisherService.extinguishers = [{}] as Extinguisher[];
+      this.emptySearch = true;
+    }
   }
   filterSearch() {
     this.search = this.search.replace(/\s/g, '');
     if (this.search != '') {
-      console.log(this.search);
       this.extinguisherService
         .getExtinguishersSearch(this.page, this.per_page, this.search)
         .subscribe((res) => {
-          this.extinguisherService.extinguishers = res as Extinguisher[];
+          this.setExtinguiserResponse(res);
         });
     } else {
-      this.getExtinguishers();
+      this.extinguisherService
+        .getExtinguishersSearch(this.page, this.per_page, this.search)
+        .subscribe((res) => {
+          this.setExtinguiserResponse(res);
+        });
     }
   }
 }
