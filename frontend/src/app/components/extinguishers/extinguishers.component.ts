@@ -68,6 +68,8 @@ export class ExtinguishersComponent implements OnInit {
     if (this.pagination_amount != diff) {
       if (this.pagination_amount < 1) {
         this.total_pages = diff;
+      } else if (this.pagination_amount < diff) {
+        this.total_pages = diff;
       } else {
         this.total_pages = diff + 1;
       }
@@ -86,6 +88,7 @@ export class ExtinguishersComponent implements OnInit {
       this.filterSearch();
     }
   }
+
   pageNumber(val) {
     this.page = val;
     this.filterSearch();

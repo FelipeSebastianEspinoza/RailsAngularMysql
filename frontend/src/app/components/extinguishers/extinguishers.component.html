@@ -22,8 +22,9 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item"><a class="page-link" (click)="setPage(-1)">Previous</a></li>
-          <li class="page-item"> </li>
-          <li *ngFor="let a of pagination_array; let index = index"><a class="page-link" (click)="pageNumber(index+1)">{{index+1}}</a>
+          <li *ngFor="let a of pagination_array; let index = index"
+            [className]="page==index+1 ? 'page-item active' : 'page-item'"><a class="page-link"
+              (click)="pageNumber(index+1)">{{index+1}}</a>
           </li>
           <li class="page-item"><a class="page-link" (click)="setPage(1)">Next</a></li>
         </ul>
