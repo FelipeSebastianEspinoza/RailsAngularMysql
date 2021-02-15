@@ -3,18 +3,22 @@ class ExtinguishersController < ApplicationController
  
   # GET /extinguishers
   def index
-    
     if params[:name]
-     
       extinguishers = Extinguisher.where('name LIKE ?', "%#{params[:name]}%")
- 
-
-
-
       paginate json: extinguishers
     else
       extinguishers = Extinguisher.where(active: 'true')
-      paginate json: extinguishers
+      #  paginate json: extinguishers 
+ 
+      @var=   paginate  extinguishers 
+      @var2= [@var,extinguishers.count] 
+     puts(@var2)
+
+       #@var= paginate  extinguishers  
+       render json: @var2
+
+    # paginate  json: @var= [extinguishers , extinguishers.count ]
+   #  render  json: extinguishers.count
     end
   end
 

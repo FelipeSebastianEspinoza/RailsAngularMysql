@@ -19,6 +19,7 @@ export class ExtinguisherService {
         this.URL + '?per_page=' + per_page + '&page=' + page + '&name=' + search
       );
     } else {
+  
       return this.http.get(
         this.URL + '?per_page=' + per_page + '&page=' + page
       );

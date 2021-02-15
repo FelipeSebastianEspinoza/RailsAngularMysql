@@ -15,6 +15,7 @@ export class ExtinguishersComponent implements OnInit {
   page: number = 1;
   per_page: number = 5;
   search: string = '';
+  totalExtinguishers: number= 0;
 
   ngOnInit(): void {
     this.filterSearch();
@@ -25,10 +26,12 @@ export class ExtinguishersComponent implements OnInit {
       this.extinguisherService.extinguishers = res as Extinguisher[];
       this.emptySearch = false;
     } else {
+      this.totalExtinguishers = 0;
       this.extinguisherService.extinguishers = [{}] as Extinguisher[];
       this.emptySearch = true;
     }
   }
+
   filterSearch() {
     this.search = this.search.replace(/\s/g, '');
     if (this.search != '') {
@@ -38,10 +41,18 @@ export class ExtinguishersComponent implements OnInit {
           this.setExtinguiserResponse(res);
         });
     } else {
+      this.extinguisherService.getExtinguishersSearch(
+        this.page,
+        this.per_page,
+        this.search
+      );
       this.extinguisherService
         .getExtinguishersSearch(this.page, this.per_page, this.search)
         .subscribe((res) => {
-          this.setExtinguiserResponse(res);
+          this.setExtinguiserResponse(res[0]);
+   
+          this.totalExtinguishers = res[1];
+
         });
     }
   }

@@ -2,6 +2,18 @@
   <form (submit)="filterSearch()">
     <div class="row">
       <div class="col-sm">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link">Previous</a></li>
+            <li class="page-item"><a class="page-link">1</a></li>
+            <li class="page-item"><a class="page-link">2</a></li>
+            <li class="page-item"><a class="page-link">3</a></li>
+            <li class="page-item"><a class="page-link">Next</a></li>
+            <p>{{totalExtinguishers}}</p>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-sm">
         <input type="text" [(ngModel)]="search" name="search" class="form-control" placeholder="Search" />
       </div>
       <div class="col-sm">
