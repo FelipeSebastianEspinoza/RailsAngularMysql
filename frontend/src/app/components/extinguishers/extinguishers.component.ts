@@ -11,12 +11,13 @@ import { Extinguisher } from '../../services/extinguisher';
 export class ExtinguishersComponent implements OnInit {
   constructor(public extinguisherService: ExtinguisherService) {}
 
-  emptySearch = false;
+  empty_search = false;
   page: number = 1;
   per_page: number = 5;
   search: string = '';
-  totalExtinguishers: number= 0;
-
+  total_extinguishers: number = 0;
+  pagination_amount: number = 0;
+  total_pages = 100;
   ngOnInit(): void {
     this.filterSearch();
   }
@@ -24,11 +25,11 @@ export class ExtinguishersComponent implements OnInit {
   setExtinguiserResponse(res) {
     if (Array.isArray(res) && res.length) {
       this.extinguisherService.extinguishers = res as Extinguisher[];
-      this.emptySearch = false;
+      this.empty_search = false;
     } else {
-      this.totalExtinguishers = 0;
+      this.total_extinguishers = 0;
       this.extinguisherService.extinguishers = [{}] as Extinguisher[];
-      this.emptySearch = true;
+      this.empty_search = true;
     }
   }
 
@@ -38,7 +39,9 @@ export class ExtinguishersComponent implements OnInit {
       this.extinguisherService
         .getExtinguishersSearch(this.page, this.per_page, this.search)
         .subscribe((res) => {
-          this.setExtinguiserResponse(res);
+          this.setExtinguiserResponse(res[0]);
+          this.total_extinguishers = res[1];
+          this.setTotalPages();
         });
     } else {
       this.extinguisherService.getExtinguishersSearch(
@@ -50,10 +53,45 @@ export class ExtinguishersComponent implements OnInit {
         .getExtinguishersSearch(this.page, this.per_page, this.search)
         .subscribe((res) => {
           this.setExtinguiserResponse(res[0]);
-   
-          this.totalExtinguishers = res[1];
-
+          this.total_extinguishers = res[1];
+          this.setTotalPages();
         });
     }
+  }
+
+  setTotalPages() {
+    this.pagination_amount = this.total_extinguishers / this.per_page;
+
+    let diff = Math.round(this.total_extinguishers / this.per_page);
+    
+    if (this.pagination_amount != diff) {
+      if (this.pagination_amount < 1) {
+        this.total_pages = diff;
+      } else {
+        this.total_pages = diff + 1;
+      }
+    } else {
+      this.total_pages = diff;
+    }
+  }
+
+  setPage(val) {
+    if (this.page + val <= 0) {
+      this.page = 1;
+    } else if (this.page + val > this.total_pages) {
+    } else {
+      this.page = this.page + val;
+      this.filterSearch();
+    }
+  }
+
+  setPerPage(val) {
+    this.page = 1;
+    this.per_page = val;
+    this.filterSearch();
+  }
+  newSearch() {
+   
+    this.page = 1;
   }
 }
