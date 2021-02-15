@@ -20,6 +20,7 @@ export class ExtinguishersComponent implements OnInit {
   total_pages = 1;
   per_page_class: number = 5;
   pagination_array = [];
+  pagination_large: boolean=false;
 
   ngOnInit(): void {
     this.filterSearch();
@@ -76,7 +77,18 @@ export class ExtinguishersComponent implements OnInit {
     } else {
       this.total_pages = diff;
     }
+    this.setPaginationArray();
+  }
+
+  setPaginationArray() {
     this.pagination_array = new Array(this.total_pages);
+    if(this.pagination_array.length>5){
+      this.pagination_large=true;
+      this.pagination_array = new Array(5)
+    }else{
+      this.pagination_large=false;
+    }
+ 
   }
 
   setPage(val) {
