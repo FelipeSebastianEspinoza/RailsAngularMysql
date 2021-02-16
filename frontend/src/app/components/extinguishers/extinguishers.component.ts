@@ -15,6 +15,7 @@ export class ExtinguishersComponent implements OnInit {
   ngOnInit(): void {
     this.getExtinguishers();
   }
+  
   getExtinguishers() {
     this.extinguisherService.getExtinguishers().subscribe((res) => {
       this.extinguisherService.extinguishers = res as Extinguisher[];
