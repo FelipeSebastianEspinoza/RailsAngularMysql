@@ -25,6 +25,7 @@ export class ExtinguisherService {
   getOneExtinguishers(id) {
     return this.http.get(this.URL + '/' + id);
   }
+
   registerExtinguisher(form) {
     let extinguisher = {};
     extinguisher = {
@@ -37,6 +38,7 @@ export class ExtinguisherService {
       //console.log(data);
     });
   }
+
   updateExtinguisher(form) {
     let extinguisher = {};
     extinguisher = {

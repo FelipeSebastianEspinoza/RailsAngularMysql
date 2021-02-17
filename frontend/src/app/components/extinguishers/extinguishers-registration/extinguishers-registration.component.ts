@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ExtinguisherService } from '../../../services/extinguisher.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Extinguisher } from '../../../services/extinguisher';
 
 @Component({
   selector: 'app-extinguishers-registration',
@@ -39,6 +38,7 @@ export class ExtinguishersRegistrationComponent implements OnInit {
       });
     }
   }
+
   setExtinguishers(res) {
     this.extinguisher = {
       id: res.id,
@@ -51,6 +51,7 @@ export class ExtinguishersRegistrationComponent implements OnInit {
       updated_at: res.updated_at,
     };
   }
+
   register(form: NgForm) {
     let extinguisher = {
       id: form.value.id,
