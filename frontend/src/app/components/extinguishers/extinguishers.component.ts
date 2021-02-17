@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExtinguisherService } from '../../services/extinguisher.service';
 import { Extinguisher } from '../../services/extinguisher';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-extinguishers',
@@ -9,7 +10,10 @@ import { Extinguisher } from '../../services/extinguisher';
   providers: [ExtinguisherService],
 })
 export class ExtinguishersComponent implements OnInit {
-  constructor(public extinguisherService: ExtinguisherService) {}
+  constructor(
+    public extinguisherService: ExtinguisherService,
+    public authService: AuthService
+  ) {}
 
   empty_search = false;
   page: number = 1;
@@ -20,7 +24,7 @@ export class ExtinguishersComponent implements OnInit {
   total_pages = 1;
   per_page_class: number = 5;
   pagination_array = [];
-  pagination_large: boolean=false;
+  pagination_large: boolean = false;
 
   ngOnInit(): void {
     this.filterSearch();
@@ -82,13 +86,12 @@ export class ExtinguishersComponent implements OnInit {
 
   setPaginationArray() {
     this.pagination_array = new Array(this.total_pages);
-    if(this.pagination_array.length>5){
-      this.pagination_large=true;
-      this.pagination_array = new Array(5)
-    }else{
-      this.pagination_large=false;
+    if (this.pagination_array.length > 5) {
+      this.pagination_large = true;
+      this.pagination_array = new Array(5);
+    } else {
+      this.pagination_large = false;
     }
- 
   }
 
   setPage(val) {
@@ -115,5 +118,11 @@ export class ExtinguishersComponent implements OnInit {
 
   newSearch() {
     this.page = 1;
+  }
+
+  delete(id) {
+    console.log(id);
+    this.extinguisherService.deleteExtinguisher(id);
+    this.filterSearch();
   }
 }

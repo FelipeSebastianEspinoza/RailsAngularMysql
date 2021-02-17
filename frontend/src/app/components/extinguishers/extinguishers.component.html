@@ -1,10 +1,13 @@
-<div class="container m-1">
-  <div class="row">
-    <div class="col-sm d-flex flex-row-reverse">
-      <button type="button" class="btn btn-primary">Primary</button>
+<ng-container *ngIf="authService.loggedIn()">
+  <div class="container m-1">
+    <div class="row">
+      <div class="col-sm d-flex flex-row-reverse">
+        <button type="button" routerLink="/extinguishers/registration/new" class="btn btn-primary">New</button>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
+
 <div class="container">
   <div class="row">
     <div class="container">
@@ -37,7 +40,7 @@
     <div class="w-100 mt-1"></div>
 
     <div class="col">
-      <table class="table table-dark   col-md-10 offset-md-1  ">
+      <table class="table table-dark col-md-10 offset-md-1">
         <thead>
           <tr>
             <th scope="name">Name</th>
@@ -51,10 +54,18 @@
             <td>No existen resultados para la búsqueda</td>
           </ng-container>
           <tr *ngFor="let item of extinguisherService.extinguishers">
-            <td>{{item.name}}</td>
-            <td>{{item.status}}</td>
-            <td>{{item.charge}}</td>
-            <td>{{item.expiration}}</td>
+            <ng-container *ngIf="item.id">
+              <td>{{item.name}}</td>
+              <td>{{item.status}}</td>
+              <td>{{item.charge}}</td>
+              <td>{{item.expiration}}</td>
+              <td>
+                <button type="button" routerLink="/extinguishers/edit/{{item.id}}" class="btn btn-primary">edit</button>
+              </td>
+              <td>
+                <button type="button" (click)="delete(item.id)" class="btn btn-danger">delete</button>
+              </td>
+            </ng-container>
           </tr>
         </tbody>
       </table>

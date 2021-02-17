@@ -14,6 +14,7 @@ import { AuthGuard } from './auth.guard';
 
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ExtinguishersComponent } from './components/extinguishers/extinguishers.component';
+import { ExtinguishersRegistrationComponent } from './components/extinguishers/extinguishers-registration/extinguishers-registration.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ExtinguishersComponent } from './components/extinguishers/extinguishers
     TaskComponent,
     PrivateTaskComponent,
     ExtinguishersComponent,
+    ExtinguishersRegistrationComponent,
   ],
   imports: [
     BrowserModule,
