@@ -121,7 +121,6 @@ export class ExtinguishersComponent implements OnInit {
   }
 
   delete(id) {
-    console.log(id);
     this.extinguisherService.deleteExtinguisher(id);
     this.filterSearch();
   }
