@@ -7,7 +7,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 
 import { ExtinguishersComponent } from './components/extinguishers/extinguishers.component';
-
+import { ExtinguishersRegistrationComponent } from './components/extinguishers/extinguishers-registration/extinguishers-registration.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -36,8 +36,18 @@ const routes: Routes = [
   {
     path: 'extinguishers',
     component: ExtinguishersComponent,
+  },
+  {
+    path: 'extinguishers/registration/:name',
+    component: ExtinguishersRegistrationComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'extinguishers/edit/:id',
+    component: ExtinguishersRegistrationComponent,
+    canActivate: [AuthGuard],
+  },
+  
 ];
 
 @NgModule({

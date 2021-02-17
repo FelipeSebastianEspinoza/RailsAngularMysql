@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExtinguisherService } from '../../services/extinguisher.service';
 import { Extinguisher } from '../../services/extinguisher';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-extinguishers',
@@ -9,16 +10,118 @@ import { Extinguisher } from '../../services/extinguisher';
   providers: [ExtinguisherService],
 })
 export class ExtinguishersComponent implements OnInit {
-  constructor(public extinguisherService: ExtinguisherService) {}
-  p: number = 1;
-  items_page: number = 5;
+  constructor(
+    public extinguisherService: ExtinguisherService,
+    public authService: AuthService
+  ) {}
+
+  empty_search = false;
+  page: number = 1;
+  per_page: number = 5;
+  search: string = '';
+  total_extinguishers: number = 0;
+  pagination_amount: number = 0;
+  total_pages = 1;
+  per_page_class: number = 5;
+  pagination_array = [];
+  pagination_large: boolean = false;
+
   ngOnInit(): void {
-    this.getExtinguishers();
+    this.filterSearch();
   }
-  
-  getExtinguishers() {
-    this.extinguisherService.getExtinguishers().subscribe((res) => {
+
+  setExtinguiserResponse(res) {
+    if (Array.isArray(res) && res.length) {
       this.extinguisherService.extinguishers = res as Extinguisher[];
-    });
+      this.empty_search = false;
+    } else {
+      this.total_extinguishers = 0;
+      this.extinguisherService.extinguishers = [{}] as Extinguisher[];
+      this.empty_search = true;
+    }
+  }
+
+  filterSearch() {
+    this.search = this.search.replace(/\s/g, '');
+    if (this.search != '') {
+      this.extinguisherService
+        .getExtinguishersSearch(this.page, this.per_page, this.search)
+        .subscribe((res) => {
+          this.setExtinguiserResponse(res[0]);
+          this.total_extinguishers = res[1];
+          this.setTotalPages();
+        });
+    } else {
+      this.extinguisherService.getExtinguishersSearch(
+        this.page,
+        this.per_page,
+        this.search
+      );
+      this.extinguisherService
+        .getExtinguishersSearch(this.page, this.per_page, this.search)
+        .subscribe((res) => {
+          this.setExtinguiserResponse(res[0]);
+          this.total_extinguishers = res[1];
+          this.setTotalPages();
+        });
+    }
+  }
+
+  setTotalPages() {
+    this.pagination_amount = this.total_extinguishers / this.per_page;
+    let diff = Math.round(this.total_extinguishers / this.per_page);
+    if (this.pagination_amount != diff) {
+      if (this.pagination_amount < 1) {
+        this.total_pages = diff;
+      } else if (this.pagination_amount < diff) {
+        this.total_pages = diff;
+      } else {
+        this.total_pages = diff + 1;
+      }
+    } else {
+      this.total_pages = diff;
+    }
+    this.setPaginationArray();
+  }
+
+  setPaginationArray() {
+    this.pagination_array = new Array(this.total_pages);
+    if (this.pagination_array.length > 5) {
+      this.pagination_large = true;
+      this.pagination_array = new Array(5);
+    } else {
+      this.pagination_large = false;
+    }
+  }
+
+  setPage(val) {
+    if (this.page + val <= 0) {
+      this.page = 1;
+    } else if (this.page + val > this.total_pages) {
+    } else {
+      this.page = this.page + val;
+      this.filterSearch();
+    }
+  }
+
+  pageNumber(val) {
+    this.page = val;
+    this.filterSearch();
+  }
+
+  setPerPage(val) {
+    this.per_page_class = val;
+    this.page = 1;
+    this.per_page = val;
+    this.filterSearch();
+  }
+
+  newSearch() {
+    this.page = 1;
+  }
+
+  delete(id) {
+    this.extinguisherService.deleteExtinguisher(id);
+    this.filterSearch();
   }
 }

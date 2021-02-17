@@ -1,0 +1,28 @@
+.div-1 {
+    width: 100%;
+    text-align: center;
+}
+.div {
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+    background: #EEE;
+    margin: 10px;
+}
+@media (max-width: 660px) {
+    .div-1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .div-2 {
+        order: 2;
+    }
+    .div-3 {
+        order: 3;
+    }
+    .text {
+        width: 100%;
+        order: 1;
+    }
+}
