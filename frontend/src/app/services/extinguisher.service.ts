@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Extinguisher } from './extinguisher';
 
 @Injectable({
@@ -34,7 +34,12 @@ export class ExtinguisherService {
         active: true,
       },
     };
-    this.http.post<any>(this.URL, extinguisher).subscribe((data) => {
+    let headers = new HttpHeaders({
+      Authorization: localStorage.getItem('token'),
+    });
+    let options = { headers: headers };
+
+    this.http.post<any>(this.URL, extinguisher, options).subscribe((data) => {
       //console.log(data);
     });
   }

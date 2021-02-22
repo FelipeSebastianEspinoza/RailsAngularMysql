@@ -1,5 +1,5 @@
 class ExtinguishersController < ApplicationController
-  before_action :set_extinguisher, only: [:show, :update, :destroy]
+  before_action :authenticate_user! ,:set_extinguisher, only: [:show, :update, :destroy]
  
   # GET /extinguishers
   def index
@@ -23,13 +23,37 @@ class ExtinguishersController < ApplicationController
   end
 
   # POST /extinguishers
-  def create
-    @extinguisher = Extinguisher.new(extinguisher_params)
+  def create  
+    if headers.present?
+      header = request.headers['Authorization']
+    puts  (header )
+    puts  (header )
+    puts  (header )
+    puts  (header )
+    puts  (header )
+    puts  (header )
+    puts  (header )
+    puts  (header )
+ 
+    puts  (header )
+    puts  (header )
+    puts  (header )
 
-    if @extinguisher.save
-      render json: @extinguisher, status: :created, location: @extinguisher
-    else
-      render json: @extinguisher.errors, status: :unprocessable_entity
+    puts  (header )
+    puts  (header )
+    puts  (header )
+
+      @search = User.where(jti: header )
+      if(!@search.blank?)
+        @extinguisher = Extinguisher.new(extinguisher_params)
+        if @extinguisher.save
+          render json: @extinguisher, status: :created, location: @extinguisher
+        else
+          render json: @extinguisher.errors, status: :unprocessable_entity
+        end
+      else
+      render json:  'error', status: 401
+     end
     end
   end
 
